@@ -1,7 +1,8 @@
-// Contactos.jsx
+// App.jsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Contactos = () => {
+const App = () => {
   return (
     <div className="container mt-5">
       <div className="text-center mb-4">
@@ -10,15 +11,34 @@ const Contactos = () => {
 
       <div className="row mt-5">
         <div className="col-md-6">
-          <a href="#" className="btn btn-primary btn-lg w-100">Lista de Contactos</a>
+          <Link to="/contactos" className="btn btn-primary btn-lg w-100">
+            Lista de Contactos
+          </Link>
         </div>
         <div className="col-md-6">
-          <a href="#" className="btn btn-success btn-lg w-100">Añadir Nuevo Contacto</a>
+          <Link to="/nuevo-contacto" className="btn btn-success btn-lg w-100">
+            Añadir Nuevo Contacto
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default Contactos;
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
