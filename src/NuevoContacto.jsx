@@ -1,117 +1,88 @@
-// NuevoContacto.jsx
-import React, { useState } from 'react';
+// Contactos.jsx
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarkerAlt, faPhone, faEnvelope, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-const NuevoContacto = () => {
-  const [nombre, setNombre] = useState('');
-  const [email, setEmail] = useState('');
-  const [telefono, setTelefono] = useState('');
-  const [direccion, setDireccion] = useState('');
+const Contactos = () => {
+    // Estado con valores genéricos
+    const [contactos, setContactos] = React.useState([
+        {
+            id: 1,
+            nombre: 'John Doe',
+            direccion: '123 Main St',
+            telefono: '555-1234',
+            email: 'john@example.com'
+        },
+        {
+            id: 2,
+            nombre: 'Jane Doe',
+            direccion: '456 Oak St',
+            telefono: '555-5678',
+            email: 'jane@example.com'
+        }
+    ]);
 
-  const handleGuardar = () => {
-    // Aquí puedes implementar la lógica para guardar el contacto
-    // Puedes enviar los datos a un servidor, almacenarlos localmente, etc.
-    console.log('Guardando contacto:', { nombre, email, telefono, direccion });
-  };
+    return (
+        <div className="container mt-5">
+            {/* Botón para agregar nuevo contacto */}
+            <div className="row mb-3">
+                <div className="col text-end">
+                    <Link to="/nuevo-contacto" className="btn btn-success">
+                        Añadir Nuevo Contacto
+                    </Link>
+                </div>
+            </div>
 
-  const validarFormulario = () => {
-    if (nombre.length < 10 || nombre.length > 30) {
-      alert('El nombre completo debe tener entre 10 y 30 caracteres.');
-      return false;
-    }
+            {/* Borde exterior con clase personalizada */}
+            <div className="border border-secondary rounded p-2 border-custom">
+                {/* Lista de contactos */}
+                {contactos.map((contacto, index) => (
+                    <div key={index} className="row mb-3">
+                        {/* Columna para la foto */}
+                        <div className="col-md-2 d-flex align-items-center">
+                            <img src="https://placekitten.com/120/120" alt="Contacto" className="rounded-circle" />
+                        </div>
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      alert('Ingrese una dirección de correo electrónico válida.');
-      return false;
-    }
+                        {/* Columna para la información del contacto */}
+                        <div className="col-md-6">
+                            <div className="mb-2">
+                                <strong>{contacto.nombre}</strong>
+                            </div>
+                            <div className="mb-2">
+                                <FontAwesomeIcon icon={faMapMarkerAlt} className="me-2" />
+                                {contacto.direccion}
+                            </div>
+                            <div className="mb-2">
+                                <FontAwesomeIcon icon={faPhone} className="me-2" />
+                                {contacto.telefono}
+                            </div>
+                            <div>
+                                <FontAwesomeIcon icon={faEnvelope} className="me-2" />
+                                {contacto.email}
+                            </div>
+                        </div>
 
-    if (!/^[0-9]{9,}$/.test(telefono)) {
-      alert('El teléfono debe tener al menos 9 dígitos numéricos.');
-      return false;
-    }
+                        {/* Columna para editar y eliminar */}
+                        <div className="col-md-4 text-end">
+                            <FontAwesomeIcon icon={faEdit} className="me-2" />
+                            <FontAwesomeIcon icon={faTrash} />
+                        </div>
 
-    if (direccion.length < 10 || direccion.length > 30) {
-      alert('La dirección debe tener entre 10 y 30 caracteres.');
-      return false;
-    }
-
-    return true;
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (validarFormulario()) {
-      handleGuardar();
-    }
-  };
-
-  return (
-    <div className="container mt-5">
-      <h1 className="text-center mb-4">Añadir un nuevo contacto</h1>
-
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="nombre" className="form-label">Nombre completo:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="nombre"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-            required
-          />
+                        {/* Línea horizontal */}
+                        {index < contactos.length - 1 && (
+                            <div className="col-12 p-1">
+                                <hr className="bg-secondary" />
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
         </div>
-
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email:</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="telefono" className="form-label">Teléfono:</label>
-          <input
-            type="tel"
-            className="form-control"
-            id="telefono"
-            value={telefono}
-            onChange={(e) => setTelefono(e.target.value)}
-            pattern="[0-9]{9,}"
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="direccion" className="form-label">Dirección:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="direccion"
-            value={direccion}
-            onChange={(e) => setDireccion(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="mb-3 text-center">
-          <button type="submit" className="btn btn-primary w-100">Guardar</button>
-        </div>
-      </form>
-
-      <div>
-        <Link to="/contactos" className="text-decoration-none">Regresar a Contactos</Link>
-      </div>
-    </div>
-  );
+    );
 };
 
-export default NuevoContacto;
+export default Contactos;
+
 
 
