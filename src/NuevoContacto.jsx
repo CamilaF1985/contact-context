@@ -27,94 +27,74 @@ const NuevoContacto = () => {
     }
   };
 
-  const validarFormulario = () => {
-    if (!validarNombre(nombre)) {
-      alert('El nombre completo debe tener entre 10 y 30 caracteres.');
-      return false;
-    }
-
-    if (!validarEmail(email)) {
-      alert('Ingrese una dirección de correo electrónico válida.');
-      return false;
-    }
-
-    if (!validarTelefono(telefono)) {
-      alert('El teléfono debe tener al menos 9 dígitos numéricos.');
-      return false;
-    }
-
-    if (!validarDireccion(direccion)) {
-      alert('La dirección debe tener entre 10 y 30 caracteres.');
-      return false;
-    }
-
-    return true;
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (validarFormulario()) {
-      await handleGuardar();
-    }
-  };
-
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-4">Añadir un nuevo contacto</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form noValidate>
         <div className="mb-3">
           <label htmlFor="nombre" className="form-label">Nombre completo:</label>
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${nombre.length > 0 && !validarNombre(nombre) ? 'is-invalid' : ''}`}
             id="nombre"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             required
           />
+          <div className="invalid-feedback">El nombre completo debe tener entre 10 y 30 caracteres.</div>
         </div>
 
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email:</label>
           <input
             type="email"
-            className="form-control"
+            className={`form-control ${email.length > 0 && !validarEmail(email) ? 'is-invalid' : ''}`}
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+          <div className="invalid-feedback">Ingrese una dirección de correo electrónico válida.</div>
         </div>
 
         <div className="mb-3">
           <label htmlFor="telefono" className="form-label">Teléfono:</label>
           <input
             type="tel"
-            className="form-control"
+            className={`form-control ${telefono.length > 0 && !validarTelefono(telefono) ? 'is-invalid' : ''}`}
             id="telefono"
             value={telefono}
             onChange={(e) => setTelefono(e.target.value)}
             pattern="[0-9]{9,}"
             required
           />
+          <div className="invalid-feedback">El teléfono debe tener al menos 9 dígitos numéricos.</div>
         </div>
 
         <div className="mb-3">
           <label htmlFor="direccion" className="form-label">Dirección:</label>
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${direccion.length > 0 && !validarDireccion(direccion) ? 'is-invalid' : ''}`}
             id="direccion"
             value={direccion}
             onChange={(e) => setDireccion(e.target.value)}
             required
           />
+          <div className="invalid-feedback">La dirección debe tener entre 10 y 30 caracteres.</div>
         </div>
 
         <div className="mb-3 text-center">
-          <button type="submit" className="btn btn-primary w-100">
+          <button
+            type="button"
+            className="btn btn-primary w-100"
+            onClick={() => {
+              if (validarNombre(nombre) && validarEmail(email) && validarTelefono(telefono) && validarDireccion(direccion)) {
+                handleGuardar();
+              }
+            }}
+          >
             Guardar
           </button>
         </div>
@@ -128,6 +108,11 @@ const NuevoContacto = () => {
 };
 
 export default NuevoContacto;
+
+
+
+
+
 
 
 

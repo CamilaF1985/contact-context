@@ -3,11 +3,13 @@ export const validarNombre = (nombre) => {
 };
 
 export const validarEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const emailParts = email.split('@');
+    return emailParts.length === 2 && emailParts[1].includes('.com');
 };
 
 export const validarTelefono = (telefono) => {
-    return /^[0-9]{9,}$/.test(telefono);
+    const numericCharacters = telefono.split('').filter(char => !isNaN(char));
+    return numericCharacters.length >= 9;
 };
 
 export const validarDireccion = (direccion) => {

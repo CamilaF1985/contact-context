@@ -75,7 +75,7 @@ const EditarContacto = () => {
         <div className="container mt-5">
             <h1 className="text-center mb-4">Editar contacto</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} noValidate>
                 <div className="mb-3">
                     <label htmlFor="nombre" className="form-label">Nombre completo:</label>
                     <input
