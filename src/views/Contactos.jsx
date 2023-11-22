@@ -19,19 +19,28 @@ const Contactos = () => {
                 </div>
             </div>
 
-            <div className="border rounded p-2 my-custom-border">
-                {contactos.map((contacto, index) => (
-                    <Contacto
-                        key={index}
-                        contacto={contacto}
-                        isLast={index === contactos.length - 1}
-                        actualizarContacto={actualizarContacto}
-                        eliminarContacto={eliminarContacto}
-                    />
-                ))}
-            </div>
+            {contactos.length > 0 ? (
+                <div className="border rounded p-2 my-custom-border">
+                    {contactos.map((contacto, index) => (
+                        <Contacto
+                            key={index}
+                            contacto={contacto}
+                            isLast={index === contactos.length - 1}
+                            actualizarContacto={actualizarContacto}
+                            eliminarContacto={eliminarContacto}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <div className="alert alert-info" role="alert">
+                    No hay contactos aún.
+                </div>
+            )}
+
             <div>
-                <Link to="/" className="text-decoration-none">Regresar a Inicio</Link>
+                <Link to="/" className="text-decoration-none">
+                    Regresar a Inicio
+                </Link>
             </div>
         </div>
     );

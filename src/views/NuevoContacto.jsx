@@ -90,14 +90,22 @@ const NuevoContacto = () => {
             type="button"
             className="btn btn-primary w-100"
             onClick={() => {
-              if (validarNombre(nombre) && validarEmail(email) && validarTelefono(telefono) && validarDireccion(direccion)) {
+              if (
+                validarNombre(nombre) &&
+                validarEmail(email) &&
+                validarTelefono(telefono) &&
+                validarDireccion(direccion)
+              ) {
                 handleGuardar();
+              } else {
+                alert('Por favor revise los campos');
               }
             }}
           >
             Guardar
           </button>
         </div>
+
       </form>
 
       <div>

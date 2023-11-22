@@ -1,9 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import App from '../Views/App';
-import NuevoContacto from '../Views/NuevoContacto';
-import Contactos from '../Views/Contactos';
-import EditarContacto from '../Views/EditarContacto';
+import App from '../views/App';
+import NuevoContacto from '../views/NuevoContacto';
+import Contactos from '../views/Contactos';
+import EditarContacto from '../views/EditarContacto';
 
 const Layout = () => {
   return (
