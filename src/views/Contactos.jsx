@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Contacto from './Contacto';
-import { useContactos } from './store';
+import { useContactos } from '../store/store';
 
 const Contactos = () => {
     const { contactos, actualizarContacto, eliminarContacto } = useContactos();

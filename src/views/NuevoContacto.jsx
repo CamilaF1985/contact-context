@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useContactos } from './store';
-import { validarNombre, validarEmail, validarTelefono, validarDireccion } from './validaciones';
+import { useContactos } from '../store/store';
+import { validarNombre, validarEmail, validarTelefono, validarDireccion } from '../assets/js/validaciones';
 
 const NuevoContacto = () => {
   const { guardarContacto } = useContactos();

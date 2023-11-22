@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useContactos } from './store';
+import { useContactos } from '../store/store';
 
 const EditarContacto = () => {
     const { id } = useParams();

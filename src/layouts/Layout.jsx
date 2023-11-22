@@ -1,10 +1,9 @@
-// Layout.jsx
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import App from './App';
-import NuevoContacto from './NuevoContacto';
-import Contactos from './Contactos';
-import EditarContacto from './EditarContacto';
+import App from '../Views/App';
+import NuevoContacto from '../Views/NuevoContacto';
+import Contactos from '../Views/Contactos';
+import EditarContacto from '../Views/EditarContacto';
 
 const Layout = () => {
   return (

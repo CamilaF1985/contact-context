@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faPhone, faEnvelope, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { useContactos } from './store';
+import { useContactos } from '../store/store';
 
 const Contacto = ({ contacto, isLast }) => {
     const { actualizarContacto, eliminarContacto } = useContactos();

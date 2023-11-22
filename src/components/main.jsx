@@ -1,12 +1,13 @@
-// main.jsx
+// src/components/main.jsx
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { ContactosProvider } from './store'; // Ajusta la ruta según tu estructura
-import Layout from './Layout';
-import './App.css';
+import { ContactosProvider } from '../store/store'; 
+import Layout from '../layouts/Layout'; 
+import '../assets/css/App.css';  
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.render(
   <React.StrictMode>
     <Router>
       <ContactosProvider>
@@ -14,7 +15,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </ContactosProvider>
     </Router>
   </React.StrictMode>,
+  document.getElementById('root')
 );
+
+
+
 
 
 
