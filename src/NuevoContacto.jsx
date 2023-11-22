@@ -1,36 +1,49 @@
-// NuevoContacto.jsx
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContactos } from './store';
+import { validarNombre, validarEmail, validarTelefono, validarDireccion } from './validaciones';
 
 const NuevoContacto = () => {
+  const { guardarContacto } = useContactos();
+  const navigate = useNavigate();
+
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
   const [direccion, setDireccion] = useState('');
 
-  const handleGuardar = () => {
-    // Aquí puedes implementar la lógica para guardar el contacto
-    // Puedes enviar los datos a un servidor, almacenarlos localmente, etc.
-    console.log('Guardando contacto:', { nombre, email, telefono, direccion });
+  const handleGuardar = async () => {
+    try {
+      await guardarContacto({
+        full_name: nombre,
+        email,
+        phone: telefono,
+        address: direccion,
+      });
+
+      navigate('/contactos');
+    } catch (error) {
+      console.error('Error al guardar el contacto:', error);
+    }
   };
 
   const validarFormulario = () => {
-    if (nombre.length < 10 || nombre.length > 30) {
+    if (!validarNombre(nombre)) {
       alert('El nombre completo debe tener entre 10 y 30 caracteres.');
       return false;
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!validarEmail(email)) {
       alert('Ingrese una dirección de correo electrónico válida.');
       return false;
     }
 
-    if (!/^[0-9]{9,}$/.test(telefono)) {
+    if (!validarTelefono(telefono)) {
       alert('El teléfono debe tener al menos 9 dígitos numéricos.');
       return false;
     }
 
-    if (direccion.length < 10 || direccion.length > 30) {
+    if (!validarDireccion(direccion)) {
       alert('La dirección debe tener entre 10 y 30 caracteres.');
       return false;
     }
@@ -38,11 +51,11 @@ const NuevoContacto = () => {
     return true;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (validarFormulario()) {
-      handleGuardar();
+      await handleGuardar();
     }
   };
 
@@ -101,17 +114,29 @@ const NuevoContacto = () => {
         </div>
 
         <div className="mb-3 text-center">
-          <button type="submit" className="btn btn-primary w-100">Guardar</button>
+          <button type="submit" className="btn btn-primary w-100">
+            Guardar
+          </button>
         </div>
       </form>
 
       <div>
-        <Link to="/contactos" className="text-decoration-none">Regresar a Contactos</Link>
+        <Link to="/" className="text-decoration-none">Regresar a Inicio</Link>
       </div>
     </div>
   );
 };
 
 export default NuevoContacto;
+
+
+
+
+
+
+
+
+
+
 
 
