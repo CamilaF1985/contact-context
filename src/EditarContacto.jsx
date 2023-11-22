@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useContactos } from './store';
-import { validarNombre, validarEmail, validarTelefono, validarDireccion } from './validaciones';
 
 const EditarContacto = () => {
     const { id } = useParams();
@@ -26,44 +25,19 @@ const EditarContacto = () => {
 
     const handleEditar = async () => {
         try {
-            if (validarFormulario()) {
-                await actualizarContacto({
-                    id: parseInt(id, 10),
-                    full_name: nombre,
-                    email,
-                    phone: telefono,
-                    address: direccion,
-                });
 
-                navigate('/contactos');
-            }
+            await actualizarContacto({
+                id: parseInt(id, 10),
+                full_name: nombre,
+                email,
+                phone: telefono,
+                address: direccion,
+            });
+
+            navigate('/contactos');
         } catch (error) {
             console.error('Error al actualizar el contacto:', error);
         }
-    };
-
-    const validarFormulario = () => {
-        if (!validarNombre(nombre)) {
-            alert('El nombre completo debe tener entre 10 y 30 caracteres.');
-            return false;
-        }
-
-        if (!validarEmail(email)) {
-            alert('Ingrese una dirección de correo electrónico válida.');
-            return false;
-        }
-
-        if (!validarTelefono(telefono)) {
-            alert('El teléfono debe tener al menos 9 dígitos numéricos.');
-            return false;
-        }
-
-        if (!validarDireccion(direccion)) {
-            alert('La dirección debe tener entre 10 y 30 caracteres.');
-            return false;
-        }
-
-        return true;
     };
 
     const handleSubmit = (event) => {
@@ -142,6 +116,7 @@ const EditarContacto = () => {
 };
 
 export default EditarContacto;
+
 
 
 
