@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import App from '../views/App';
+import App from '../App';
 import NuevoContacto from '../views/NuevoContacto';
 import Contactos from '../views/Contactos';
 import EditarContacto from '../views/EditarContacto';
