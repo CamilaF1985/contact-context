@@ -10,7 +10,6 @@ export default defineConfig({
     alias: {
       '/src/main.jsx': path.resolve(__dirname, 'src', 'components', 'main.jsx'),
       '/src/Layout.jsx': path.resolve(__dirname, 'src', 'layouts', 'Layout.jsx'),
-      // Agrega otras rutas según sea necesario
     },
   },
 });
